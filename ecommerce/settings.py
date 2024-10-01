@@ -5,11 +5,10 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-(m+6rv)!ex-co&)#ba^2x!jwoe(ov=1r$ls8zai#x6*^esrbqm'
-DEBUG = True
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-(m+6rv)!ex-co&)#ba^2x!jwoe(ov=1r$ls8zai#x6*^esrbqm')  # Get from env
+DEBUG = os.getenv('DEBUG', 'True') == 'True'  # Get DEBUG from env (default to True for local dev)
 
-
-ALLOWED_HOSTS = ['vercel.app', '.now.sh']  # Add your domain here
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', 'localhost', '127.0.0.1']  # Add your domain here
 
 # Application definition
 INSTALLED_APPS = [
@@ -84,8 +83,8 @@ USE_TZ = True
 
 # Static and Media files
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Directory for collectstatic output
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Optional: Where additional static files live
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Directory for collectstatic output
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Optional: Additional static file locations
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
